@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Record your voice and turn it into text in real time." />
+    <meta name="theme-color" content="#09111f" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2309111f'/%3E%3Cpath d='M13 34h6l4-15 7 29 7-35 6 21h8' fill='none' stroke='%235eead4' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>VoiceNote — Voice to text</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="VoiceNote home">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </span>
+          <span>VoiceNote</span>
+        </a>
+        <span class="privacy-note"><span class="privacy-dot"></span>No audio files are saved</span>
+      </header>
+
+      <section class="workspace" aria-labelledby="page-title">
+        <div class="intro">
+          <p class="eyebrow">VOICE TO TEXT</p>
+          <h1 id="page-title">Say it. See it.</h1>
+          <p>Capture your thoughts without breaking your flow.</p>
+        </div>
+
+        <div class="recorder-card">
+          <div class="status-row">
+            <div class="status" id="status" role="status" aria-live="polite">
+              <span class="status-indicator"></span>
+              <span id="statusText">Ready to record</span>
+            </div>
+            <div class="recorder-options">
+              <label class="language-picker" for="languageSelect">
+                <span>Language</span>
+                <select id="languageSelect" aria-label="Speech recognition language">
+                  <option value="mixed" selected>中文 + English</option>
+                  <option value="zh-CN">普通话</option>
+                  <option value="yue-Hant-HK">廣東話</option>
+                  <option value="en-US">English</option>
+                </select>
+              </label>
+              <time id="timer" aria-label="Recording duration">00:00</time>
+            </div>
+          </div>
+
+          <canvas id="waveform" aria-label="Live audio waveform"></canvas>
+
+          <button class="record-button" id="recordButton" type="button" aria-label="Start recording" aria-pressed="false">
+            <span class="record-icon" aria-hidden="true"></span>
+            <span id="buttonText">Start recording</span>
+          </button>
+          <p class="shortcut">中英文可混合输入 · Press <kbd>Space</kbd> to start or stop</p>
+        </div>
+
+        <section class="transcript-card" aria-labelledby="transcript-title">
+          <div class="transcript-header">
+            <div>
+              <p class="section-label">TRANSCRIPT</p>
+              <h2 id="transcript-title">What you said</h2>
+            </div>
+            <div class="actions">
+              <button class="icon-button" id="copyButton" type="button" aria-label="Copy transcript" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+                <span>Copy</span>
+              </button>
+              <button class="icon-button danger" id="clearButton" type="button" aria-label="Clear transcript" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path></svg>
+                <span>Clear</span>
+              </button>
+            </div>
+          </div>
+          <div class="transcript-content" id="transcriptContent" aria-live="polite">
+            <p class="placeholder" id="placeholder">Your words will appear here as you speak.</p>
+            <p id="finalTranscript"></p>
+            <span id="interimTranscript"></span>
+          </div>
+        </section>
+
+        <p class="support-message" id="supportMessage" role="alert" hidden></p>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
